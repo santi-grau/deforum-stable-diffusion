@@ -66,7 +66,7 @@ class SamplerCallback(object):
 
     def view_sample_step(self, latents, path_name_modifier=''):
         if self.save_sample_per_step:
-            if path_name_modifier is 'x0_pred' :
+            if path_name_modifier == 'x0_pred' :
                 samples = self.model.decode_first_stage(latents)
                 fname = f'{path_name_modifier}_{self.step_index:05}.png'
                 for i, sample in enumerate(samples):
