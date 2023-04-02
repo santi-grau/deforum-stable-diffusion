@@ -74,7 +74,7 @@ class SamplerCallback(object):
                         sample = sample.double().cpu().add(1).div(2).clamp(0, 1)
                         sample = torch.tensor(np.array(sample))
                         grid = make_grid(sample, 4).cpu()
-                        TF.to_pil_image(grid).save(os.path.join(self.paths_to_image_steps[i], 'fr' + self.frameCount, fname))
+                        TF.to_pil_image(grid).save(os.path.join(self.paths_to_image_steps[i], 'fr' +  str(self.frameCount), fname))
         # if self.save_noise_sample_per_step:
         #     if path_name_modifier == 'x0_pred' :
         #         if (self.step_index % 2) == 0:
