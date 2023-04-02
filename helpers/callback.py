@@ -69,7 +69,7 @@ class SamplerCallback(object):
             if path_name_modifier == 'x0_pred' :
                 if (self.step_index % 2) == 0:
                     samples = self.model.decode_first_stage(latents)
-                    fname = f'{path_name_modifier}_{frame_idx}_{self.step_index:05}.png'
+                    fname = f'{path_name_modifier}_{self.step_index:05}.png'
                     for i, sample in enumerate(samples):
                         sample = sample.double().cpu().add(1).div(2).clamp(0, 1)
                         sample = torch.tensor(np.array(sample))
