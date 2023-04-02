@@ -533,7 +533,7 @@ def render_interpolation(args, anim_args, animation_prompts, root):
                 args.init_c = prompt1_c.add(prompt2_c.sub(prompt1_c).mul(j * 1/dist_frames))
 
                 # sample the diffusion model
-                results = generate(args, root)
+                results = generate(args, root, frame_idx)
                 image = results[0]
 
                 filename = f"{args.timestring}_{frame_idx:05}.png"
@@ -559,7 +559,7 @@ def render_interpolation(args, anim_args, animation_prompts, root):
                 args.init_c = prompt1_c.add(prompt2_c.sub(prompt1_c).mul(j * 1/(anim_args.interpolate_x_frames+1)))
 
                 # sample the diffusion model
-                results = generate(args, root)
+                results = generate(args, root, frame_idx)
                 image = results[0]
 
                 filename = f"{args.timestring}_{frame_idx:05}.png"
