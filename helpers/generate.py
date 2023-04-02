@@ -175,7 +175,8 @@ def generate(args, root, frame = 0, return_latent=False, return_sample=False, re
                             init_latent=init_latent,
                             sigmas=k_sigmas,
                             sampler=sampler,
-                            verbose=False).callback 
+                            verbose=False,
+                            frame).callback 
 
     clamp_fn = threshold_by(threshold=args.clamp_grad_threshold, threshold_type=args.grad_threshold_type, clamp_schedule=args.clamp_schedule)
 

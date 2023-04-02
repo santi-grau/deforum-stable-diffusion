@@ -10,8 +10,7 @@ from IPython import display
 #
 class SamplerCallback(object):
     # Creates the callback function to be passed into the samplers for each step
-    def __init__(self, args, root, mask=None, init_latent=None, sigmas=None, sampler=None,
-                  verbose=False):
+    def __init__(self, args, root, mask=None, init_latent=None, sigmas=None, sampler=None, verbose=False, frame=0):
         self.model = root.model
         self.device = root.device
         self.sampler_name = args.sampler
@@ -25,7 +24,8 @@ class SamplerCallback(object):
         self.batch_size = args.n_samples
         self.save_sample_per_step = args.save_sample_per_step
         self.show_sample_per_step = args.show_sample_per_step
-        self.paths_to_image_steps = [os.path.join( args.outdir, f"{args.timestring}_{index:02}_{args.seed}") for index in range(args.n_samples) ]
+
+        self.paths_to_image_steps = [os.path.join( args.outdir, f"{args.timestring}_{index:02}_{index:05}_{args.seed}") for index in range(args.n_samples) ]
 
         if self.save_sample_per_step:
             for path in self.paths_to_image_steps:
