@@ -74,12 +74,22 @@ class SamplerCallback(object):
                         sample = sample.double().cpu().add(1).div(2).clamp(0, 1)
                         sample = torch.tensor(np.array(sample))
                         grid = make_grid(sample, 4).cpu()
-                        TF.to_pil_image(grid).save(os.path.join(self.paths_to_image_steps[i], fname))
+                        TF.to_pil_image(grid).save(os.path.join(self.paths_to_image_steps[i], 'fr' + self.frameCount, fname))
+        # if self.save_noise_sample_per_step:
+        #     if path_name_modifier == 'x0_pred' :
+        #         if (self.step_index % 2) == 0:
+        #             samples = self.model.decode_first_stage(latents)
+        #             fname = f'{path_name_modifier}_fr{self.frameCount}_{self.step_index:05}.png'
+        #             for i, sample in enumerate(samples):
+        #                 sample = sample.double().cpu().add(1).div(2).clamp(0, 1)
+        #                 sample = torch.tensor(np.array(sample))
+        #                 grid = make_grid(sample, 4).cpu()
+        #                 TF.to_pil_image(grid).save(os.path.join(self.paths_to_image_steps[i], fname))
         if self.show_sample_per_step:
             samples = self.model.linear_decode(latents)
             print(path_name_modifier)
             self.display_images(samples)
-        self.frameCount += 1
+        
         return
 
     # The callback function is applied to the image at each step
@@ -106,6 +116,7 @@ class SamplerCallback(object):
 
         self.view_sample_step(args_dict['denoised'], "x0_pred")
         self.view_sample_step(args_dict['x'], "x")
+        self.frameCount += 1
 
     # Callback for Compvis samplers
     # Function that is called on the image (img) and step (i) at each step
