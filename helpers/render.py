@@ -577,7 +577,7 @@ def render_interpolation(args, anim_args, animation_prompts, root):
 
     # generate the last prompt
     args.init_c = prompts_c_s[-1]
-    results = generate(args, root)
+    results = generate(args, root, frame_idx)
     image = results[0]
     filename = f"{args.timestring}_{frame_idx:05}.png"
     save_8_16_or_32bpc_image(image, args.outdir, filename, args.bit_depth_output)
