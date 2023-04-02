@@ -222,7 +222,8 @@ def generate(args, root, frame = 0, return_latent=False, return_sample=False, re
                             t_enc=t_enc, 
                             device=root.device, 
                             cb=callback,
-                            verbose=False)
+                            verbose=False,
+                            frame=frame)
                     else:
                         # args.sampler == 'plms' or args.sampler == 'ddim':
                         if init_latent is not None and args.strength > 0:
