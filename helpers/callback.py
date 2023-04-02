@@ -4,6 +4,7 @@ import torchvision.transforms.functional as TF
 from torchvision.utils import make_grid
 import numpy as np
 from IPython import display
+import time
 
 #
 # Callback functions
@@ -25,7 +26,7 @@ class SamplerCallback(object):
         self.save_sample_per_step = args.save_sample_per_step
         self.show_sample_per_step = args.show_sample_per_step
 
-        self.paths_to_image_steps = [os.path.join( args.outdir, f"{args.timestring}_{index:02}_{index:05}_{args.seed}") for index in range(args.n_samples) ]
+        self.paths_to_image_steps = [os.path.join( args.outdir, f"{args.timestring}_{index:02}_{round(time.time()*1000)}_{args.seed}") for index in range(args.n_samples) ]
 
         if self.save_sample_per_step:
             for path in self.paths_to_image_steps:
