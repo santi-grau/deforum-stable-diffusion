@@ -115,7 +115,7 @@ class SamplerCallback(object):
             args_dict['x'].copy_(new_img)
         
         if self.save_sample_per_step:
-             os.makedirs( os.path.join( self.paths_to_image_steps[i], 'fr' +  str( self.frameCount ) ), exist_ok=True)
+             os.makedirs( os.path.join( self.paths_to_image_steps[0], 'fr' +  str( self.frameCount ) ), exist_ok=True)
             
 
         self.view_sample_step(args_dict['denoised'], "x0_pred")
