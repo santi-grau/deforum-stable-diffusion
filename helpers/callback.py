@@ -25,7 +25,7 @@ class SamplerCallback(object):
         self.batch_size = args.n_samples
         self.save_sample_per_step = args.save_sample_per_step
         self.show_sample_per_step = args.show_sample_per_step
-        self.paths_to_image_steps = [os.path.join( args.outdir, f"{args.timestring}_{index:02}_{args.seed}") for index in range(args.n_samples) ]
+        self.paths_to_image_steps = [os.path.join( args.outdir, f"{args.timestring}_{index:02}_{args.seed}") for index in range(args.steps) ]
         self.frameCount = 0
         if self.save_sample_per_step:
             for path in self.paths_to_image_steps:
@@ -69,12 +69,12 @@ class SamplerCallback(object):
             if path_name_modifier == 'x0_pred' :
                 if (self.step_index % 2) == 0:
                     samples = self.model.decode_first_stage(latents)
-                    fname = f'{path_name_modifier}_fr{self.frameCount}_{self.step_index:05}.png'
+                    fname = f'{path_name_modifier}_{self.step_index:05}.png'
                     for i, sample in enumerate(samples):
                         sample = sample.double().cpu().add(1).div(2).clamp(0, 1)
                         sample = torch.tensor(np.array(sample))
                         grid = make_grid(sample, 4).cpu()
-                        TF.to_pil_image(grid).save(os.path.join(self.paths_to_image_steps[i], 'fr' +  str(self.frameCount), fname))
+                        TF.to_pil_image(grid).save( os.path.join( self.paths_to_image_steps[i], 'fr' +  str( self.frameCount ), fname ) )
         # if self.save_noise_sample_per_step:
         #     if path_name_modifier == 'x0_pred' :
         #         if (self.step_index % 2) == 0:
@@ -113,6 +113,10 @@ class SamplerCallback(object):
             is_masked = torch.logical_and(self.mask >= self.mask_schedule[args_dict['i']], self.mask != 0 )
             new_img = init_noise * torch.where(is_masked,1,0) + args_dict['x'] * torch.where(is_masked,0,1)
             args_dict['x'].copy_(new_img)
+        
+        if self.save_sample_per_step:
+             os.makedirs( os.path.join( self.paths_to_image_steps[i], 'fr' +  str( self.frameCount ) ), exist_ok=True)
+            
 
         self.view_sample_step(args_dict['denoised'], "x0_pred")
         self.view_sample_step(args_dict['x'], "x")
