@@ -24,7 +24,6 @@ def _is_numpy_image(img):
 class ToTensor(object):
     def __init__(self):
         self.normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-
     def __call__(self, image, target_size=(640, 480)):
         # image = image.resize(target_size)
         image = self.to_tensor(image)

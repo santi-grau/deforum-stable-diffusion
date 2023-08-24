@@ -80,6 +80,7 @@ def install_requirements(verbose=False):
         "scikit-learn",
         "timm",
         "torchdiffeq",
+        "torchmetrics==0.11.4",
         "transformers==4.19.2",
         "safetensors",
         "albumentations",

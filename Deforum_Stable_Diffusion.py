@@ -113,7 +113,7 @@ root.models_path, root.output_path = get_model_output_paths(root)
 def ModelSetup():
     map_location = "cuda" #@param ["cpu", "cuda"]
     model_config = "v1-inference.yaml" #@param ["custom","v2-inference.yaml","v2-inference-v.yaml","v1-inference.yaml"]
-    model_checkpoint =  "Protogen_V2.2.ckpt" #@param ["custom","v2-1_768-ema-pruned.ckpt","v2-1_512-ema-pruned.ckpt","768-v-ema.ckpt","512-base-ema.ckpt","Protogen_V2.2.ckpt","v1-5-pruned.ckpt","v1-5-pruned-emaonly.ckpt","sd-v1-4-full-ema.ckpt","sd-v1-4.ckpt","sd-v1-3-full-ema.ckpt","sd-v1-3.ckpt","sd-v1-2-full-ema.ckpt","sd-v1-2.ckpt","sd-v1-1-full-ema.ckpt","sd-v1-1.ckpt", "robo-diffusion-v1.ckpt","wd-v1-3-float16.ckpt"]
+    model_checkpoint =  "v1-5-pruned-emaonly.ckpt" #@param ["custom","v2-1_768-ema-pruned.ckpt","v2-1_512-ema-pruned.ckpt","768-v-ema.ckpt","512-base-ema.ckpt","Protogen_V2.2.ckpt","v1-5-pruned.ckpt","v1-5-pruned-emaonly.ckpt","sd-v1-4-full-ema.ckpt","sd-v1-4.ckpt","sd-v1-3-full-ema.ckpt","sd-v1-3.ckpt","sd-v1-2-full-ema.ckpt","sd-v1-2.ckpt","sd-v1-1-full-ema.ckpt","sd-v1-1.ckpt", "robo-diffusion-v1.ckpt","wd-v1-3-float16.ckpt"]
     custom_config_path = "" #@param {type:"string"}
     custom_checkpoint_path = "" #@param {type:"string"}
     return locals()
@@ -227,12 +227,11 @@ def DeforumAnimArgs():
 # !! }}
 # prompts
 prompts = {
-    0: "a beautiful lake by Asher Brown Durand, trending on Artstation",
-    10: "a beautiful portrait of a woman by Artgerm, trending on Artstation",
+    0: "A photo of brutalist building in the style of hiroshi sugimoto made of concrete and marble, eerie mood, sorrounded by fog, crowd of people in front, high detail, burnt film, 4k, tele lens",
 }
 
 neg_prompts = {
-    0: "mountain",
+   
 }
 
 # can be a string, list, or dictionary
@@ -270,15 +269,15 @@ def DeforumArgs():
 
     #@markdown **Save & Display Settings**
     save_samples = True #@param {type:"boolean"}
-    save_settings = True #@param {type:"boolean"}
+    save_settings = False #@param {type:"boolean"}
     display_samples = True #@param {type:"boolean"}
     save_sample_per_step = False #@param {type:"boolean"}
     show_sample_per_step = False #@param {type:"boolean"}
 
     #@markdown **Batch Settings**
-    n_batch = 1 #@param
+    n_batch = 8 #@param
     n_samples = 1 #@param
-    batch_name = "StableFun" #@param {type:"string"}
+    batch_name = "TestsConsole" #@param {type:"string"}
     filename_format = "{timestring}_{index}_{prompt}.png" #@param ["{timestring}_{index}_{seed}.png","{timestring}_{index}_{prompt}.png"]
     seed_behavior = "iter" #@param ["iter","fixed","random","ladder","alternate"]
     seed_iter_N = 1 #@param {type:'integer'}
@@ -288,7 +287,7 @@ def DeforumArgs():
 
     #@markdown **Init Settings**
     use_init = False #@param {type:"boolean"}
-    strength = 0.65 #@param {type:"number"}
+    strength = 0.35 #@param {type:"number"}
     strength_0_no_init = True # Set the strength to 0 automatically when no init image is used
     init_image = "https://cdn.pixabay.com/photo/2022/07/30/13/10/green-longhorn-beetle-7353749_1280.jpg" #@param {type:"string"}
     add_init_noise = False #@param {type:"boolean"}
