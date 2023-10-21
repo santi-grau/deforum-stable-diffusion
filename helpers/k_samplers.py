@@ -40,6 +40,7 @@ def sampler_fn(
         "extra_args": {"cond": c, "uncond": uc, "cond_scale": args.scale},
         "disable": False,
         "callback": cb,
+        "clamp_steps" : args.clamp_steps
     }
     min = sigmas[0].item()
     max = min
