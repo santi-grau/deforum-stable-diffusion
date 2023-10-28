@@ -141,7 +141,7 @@ def sample_euler_ancestral(model, x, sigmas, extra_args=None, callback=None, dis
     extra_args = {} if extra_args is None else extra_args
     noise_sampler = default_noise_sampler(x) if noise_sampler is None else noise_sampler
     s_in = x.new_ones([x.shape[0]])
-    clamp = len(sigmas) - 1
+    clamp = len(sigmas) 
     if( clamp_steps > 0 ) : clamp = clamp_steps
     for i in trange(clamp, disable=disable):
         denoised = model(x, sigmas[i] * s_in, **extra_args)
