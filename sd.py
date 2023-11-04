@@ -134,7 +134,7 @@ def DeforumArgs():
     seed = 2859783428 #@param
     sampler = 'euler_ancestral' #@param ["klms","dpm2","dpm2_ancestral","heun","euler","euler_ancestral","plms", "ddim", "dpm_fast", "dpm_adaptive", "dpmpp_2s_a", "dpmpp_2m"]
     steps = 50 #@param
-    clamp_steps = 30 #@param
+    clamp_steps = 1 #@param
     scale = 7.2 #@param
     ddim_eta = 0.0 #@param
     dynamic_threshold = None
@@ -343,7 +343,7 @@ def success():
                     cv2.imwrite(outputdir+"inputframes/"+str(count).zfill(5)+".jpg",img[r:r+sizeY,c:c+sizeX,:])
                     count = count+1
         # os.remove(outputdir+'\imageToSave.png')
-        # args.clamp_steps = float(request.form['steps'])
+        args.clamp_steps = int(request.form['steps'])
         prompts[0] = request.form['prompt']
         neg_prompts[0] = request.form['neg_prompt']
         args.strength = float(request.form['strength'])
